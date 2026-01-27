@@ -29,8 +29,8 @@ const REVIEWS: Review[] = [
     rating: 5,
     title: "Rivian Service Center Recommended",
     content: "I damaged my Rivian truck and was looking for a local repair shop... After contacting the service center in Orlando, they recommended Revive, Renew and Restore. From start to finish, Tony and his entire team were a pleasure to deal with and kept me up to date... The quality of the workmanship... and the customer service were top notch. To anyone with a Rivian... this is the place to go – you will not be disappointed.",
-    hasMedia: "photo",
-    mediaSrc: "/review_repaired_rivian.png" 
+    hasMedia: "none",
+    // mediaSrc: "/review_repaired_rivian.png" 
   },
   {
     id: "2",

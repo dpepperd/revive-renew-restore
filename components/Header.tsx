@@ -16,12 +16,12 @@ export default function Header() {
         {/* Logo Area (Super-Sized) */}
         <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-4">
-            {/* Logo increased to h-20 (80px) to fill the header height */}
-            <div className="relative h-16 w-16 md:h-24 md:w-24 shrink-0 rounded-full border-2 border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.1)] bg-black/50 z-50 mt-2">
+            {/* Logo reduced to ~1.5x size (h-24/h-40) for better balance */}
+            <div className="relative h-24 w-24 md:h-40 md:w-40 shrink-0 rounded-full border-2 border-white/20 shadow-[0_0_25px_rgba(0,163,224,0.3)] bg-black/80 z-50 translate-y-4 md:translate-y-8">
               <img 
                 src="/Revive_renew_restore_logo.png" 
                 alt="Revive Renew Restore" 
-                className="w-full h-full object-contain p-0.5" 
+                className="w-full h-full object-contain p-1.5" 
               />
             </div>
             

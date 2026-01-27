@@ -21,7 +21,7 @@ export default function Footer() {
                   REVIVE<span className="text-electric-blue">.</span> RENEW<span className="text-metallic-silver">.</span><br/>
                   RESTORE<span className="text-electric-blue">.</span>
                 </span>
-                <p className="font-body text-slate-600 max-w-sm leading-relaxed mx-auto md:mx-0">
+                <p className="font-body text-black max-w-sm leading-relaxed mx-auto md:mx-0 font-medium">
                   Jacksonville's premier Rivian-Certified collision center. 
                   Where precision engineering meets master craftsmanship.
                 </p>
@@ -31,8 +31,8 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-tech text-slate-900 mb-6 tracking-widest">CONTACT</h4>
-            <ul className="space-y-4 font-body text-slate-600 text-sm">
+            <h4 className="font-tech text-black mb-6 tracking-widest font-bold">CONTACT</h4>
+            <ul className="space-y-4 font-body text-black text-sm font-medium">
               <li className="hover:text-electric-blue cursor-pointer transition-colors">4150 Springrove St<br/>Jacksonville, FL 32209</li>
               <li className="hover:text-electric-blue cursor-pointer transition-colors">(904) 555-0123</li>
               <li className="hover:text-electric-blue cursor-pointer transition-colors">estimates@revive.com</li>
@@ -41,21 +41,21 @@ export default function Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="font-tech text-slate-900 mb-6 tracking-widest">HOURS</h4>
-            <ul className="space-y-4 font-body text-slate-600 text-sm">
-              <li className="flex justify-between"><span>Mon - Fri</span> <span className="text-slate-900">8:00 AM - 6:00 PM</span></li>
-              <li className="flex justify-between"><span>Saturday</span> <span className="text-slate-900">By Appt Only</span></li>
-              <li className="flex justify-between"><span>Sunday</span> <span className="text-white bg-slate-800 px-2 rounded text-xs py-0.5">CLOSED</span></li>
+            <h4 className="font-tech text-black mb-6 tracking-widest font-bold">HOURS</h4>
+            <ul className="space-y-4 font-body text-black text-sm font-medium">
+              <li className="flex justify-between"><span>Mon - Fri</span> <span className="text-black font-bold">8:00 AM - 6:00 PM</span></li>
+              <li className="flex justify-between"><span>Saturday</span> <span className="text-black font-bold">By Appt Only</span></li>
+              <li className="flex justify-between"><span>Sunday</span> <span className="text-white bg-black px-2 rounded text-xs py-0.5">CLOSED</span></li>
             </ul>
           </div>
 
         </div>
         
-        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-tech">
+        <div className="border-t border-slate-300 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-black font-tech font-medium">
           <p>&copy; 2026 REVIVE RENEW RESTORE INC. ALL RIGHTS RESERVED.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <span className="hover:text-slate-900 cursor-pointer">PRIVACY</span>
-            <span className="hover:text-slate-900 cursor-pointer">TERMS</span>
+            <span className="hover:text-electric-blue cursor-pointer">PRIVACY</span>
+            <span className="hover:text-electric-blue cursor-pointer">TERMS</span>
           </div>
         </div>
       </div>

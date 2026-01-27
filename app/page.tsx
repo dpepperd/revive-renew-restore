@@ -73,10 +73,9 @@ export default function Home() {
       {/* 3. STATS BAR */}
       <section className="relative z-20 bg-white border-t border-slate-200 shadow-xl">
         <div className="container mx-auto px-6 py-12 md:py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { label: "Customer Satisfaction", value: "4.9★", color: "text-electric-blue" },
-              { label: "Avg Completion", value: "3.2 Days", color: "text-slate-900" },
               { label: "Cars Restored", value: "2,000+", color: "text-deep-gold" },
               { label: "Rivian Certified", value: "100%", color: "text-electric-blue" },
             ].map((stat, i) => (
@@ -94,27 +93,30 @@ export default function Home() {
       </section>
 
       {/* 4. BENTO GRID: WHY CHOOSE US */}
-      <section id="about" className="py-24 bg-slate-50 relative">
-        <div className="container mx-auto px-6">
+      <section id="about" className="py-24 bg-slate-50 relative overflow-hidden">
+        {/* Subtle Background Accent */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-electric-blue/5 rounded-full blur-3xl -z-0 pointer-events-none"></div>
+
+        <div className="container mx-auto px-6 relative z-10">
           
           <div className="mb-16 text-center">
-            <h2 className="font-heading text-5xl md:text-6xl mb-4">
-              THE <span className="text-electric-blue">REVIVE</span> STANDARD
+            <h2 className="font-heading text-5xl md:text-6xl mb-4 drop-shadow-sm">
+              THE <span className="text-electric-blue inline-block hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(0,163,224,0.3)]">REVIVE</span> STANDARD
             </h2>
-            <p className="font-body text-slate-600 max-w-2xl mx-auto">
+            <p className="font-body text-slate-600 max-w-2xl mx-auto text-lg">
               We don't just repair vehicles; we restore factory specifications. 
               Precision engineering meets master craftsmanship.
             </p>
           </div>
 
           {/* THE BENTO GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[650px]">
             
-            {/* Block 1: RIVIAN CERTIFIED (Fixed Layout with Mobile Responsiveness) */}
-            <div className="md:row-span-2 relative group overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 flex flex-col justify-between hover:border-electric-blue/50 transition-colors shadow-sm">
+            {/* Block 1: RIVIAN CERTIFIED */}
+            <div className="md:row-span-2 relative group overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 flex flex-col justify-between hover:border-electric-blue/50 transition-all duration-500 shadow-lg hover:shadow-2xl hover:scale-[1.02] z-10">
               
-              {/* THE BADGE - Responsive Sizing (w-24 mobile, w-32 desktop) */}
-              <div className="absolute top-6 right-6 w-24 md:w-32 bg-white p-2 rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.5)] transform rotate-6 group-hover:rotate-0 transition-transform duration-500 z-20">
+              {/* THE BADGE */}
+              <div className="absolute top-6 right-6 w-24 md:w-32 bg-white p-2 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.1)] transform rotate-6 group-hover:rotate-0 group-hover:scale-110 transition-all duration-500 z-20">
                 <img 
                   src="/rivian-badge.jpg" 
                   alt="Rivian Certified Fleet Center" 
@@ -122,93 +124,101 @@ export default function Home() {
                 />
               </div>
 
-              {/* TEXT CONTENT - Responsive Spacing (mt-24 mobile, mt-32 desktop) */}
+              {/* TEXT CONTENT */}
               <div className="relative z-10 mt-24 md:mt-32">
-                <h3 className="font-heading text-3xl md:text-4xl mb-3 text-slate-900 leading-none">
+                <div className="w-12 h-1 bg-electric-blue mb-6 group-hover:w-24 transition-all duration-500"></div>
+                <h3 className="font-heading text-4xl md:text-5xl mb-4 text-slate-900 leading-[0.9]">
                   RIVIAN<br/>
-                  <span className="text-electric-blue">CERTIFIED</span>
+                  <span className="text-electric-blue text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-blue-600">CERTIFIED</span>
                 </h3>
-                <p className="font-body text-slate-600 text-sm leading-relaxed max-w-[100%] md:max-w-[90%]">
+                <p className="font-body text-slate-600 text-sm md:text-base leading-relaxed max-w-[100%] md:max-w-[90%]">
                   One of only 12 facilities in Florida authorized to handle R1T & R1S structural repairs. We use official Rivian diagnostic software and OEM parts exclusively.
                 </p>
               </div>
 
               {/* Decorative 'Official Partner' Bar */}
-              <div className="mt-6 h-16 md:h-20 w-full bg-gradient-to-r from-electric-blue/20 to-transparent rounded-lg border border-electric-blue/20 flex items-center justify-center relative overflow-hidden shrink-0">
+              <div className="mt-8 h-14 w-full bg-gradient-to-r from-electric-blue/10 to-transparent rounded-lg border border-electric-blue/20 flex items-center justify-center relative overflow-hidden shrink-0 group-hover:border-electric-blue/40 transition-colors">
                  <div className="absolute inset-0 bg-electric-blue/5 animate-pulse"></div>
-                 <span className="font-tech text-electric-blue tracking-widest text-[10px] md:text-xs relative z-10 font-bold">OFFICIAL PARTNER</span>
+                 <span className="font-tech text-electric-blue tracking-[0.2em] text-xs relative z-10 font-bold flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-electric-blue shadow-[0_0_10px_#00A3E0]"></span>
+                    OFFICIAL PARTNER
+                 </span>
               </div>
             </div>
 
-            {/* Block 2: LOCATION MAP (Dark Mode Embed) */}
-            <div className="md:col-span-2 relative group overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 hover:border-electric-blue/30 transition-colors h-64 md:h-auto shadow-sm">
+            {/* Block 2: LOCATION MAP */}
+            <div className="md:col-span-2 relative group overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 shadow-lg hover:shadow-2xl hover:scale-[1.01] transition-all duration-500 min-h-[250px]">
               {/* THE DARK MODE MAP EMBED */}
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3442.276632463768!2d-81.6371169244825!3d30.37128097476059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e5b0b9231718cb%3A0x628024254070217!2s4150%20Springrove%20St%2C%20Jacksonville%2C%20FL%2032209!5e0!3m2!1sen!2sus!4v1709230000000!5m2!1sen!2sus" 
                 width="100%" 
                 height="100%" 
-                style={{ border: 0, filter: "grayscale(100%) opacity(0.8)" }}
+                style={{ border: 0, filter: "grayscale(100%) invert(90%) contrast(80%)" }}
                 allowFullScreen={true} 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500 mix-blend-luminosity"
               ></iframe>
               
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent pointer-events-none"></div>
               
               <div className="absolute bottom-0 left-0 p-8 z-20 w-full flex justify-between items-end pointer-events-none">
                 <div>
-                  <h3 className="font-heading text-3xl mb-1 text-white drop-shadow-md">JACKSONVILLE HQ</h3>
-                  <p className="font-body text-electric-blue drop-shadow-md bg-black/50 px-2 py-1 rounded inline-block">4150 Springrove St.</p>
+                  <h3 className="font-heading text-3xl mb-1 text-white drop-shadow-md group-hover:text-electric-blue transition-colors duration-300">JACKSONVILLE HQ</h3>
+                  <div className="flex items-center gap-2 text-slate-300">
+                    <svg className="w-4 h-4 text-electric-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <p className="font-body text-sm font-medium">4150 Springrove St.</p>
+                  </div>
                 </div>
                 <a 
                   href="https://maps.google.com/?q=4150+Springrove+St,+Jacksonville,+FL" 
                   target="_blank"
-                  className="hidden sm:block px-6 py-2 bg-white text-charcoal font-bold font-tech text-sm hover:bg-electric-blue hover:text-white transition-colors skew-x-[-10deg] pointer-events-auto shadow-lg"
+                  className="hidden sm:block px-6 py-2 bg-electric-blue text-white font-bold font-tech text-sm hover:bg-white hover:text-charcoal transition-all duration-300 skew-x-[-10deg] pointer-events-auto shadow-[0_0_20px_rgba(0,163,224,0.4)] hover:shadow-white/20 transform hover:-translate-y-1"
                 >
                   <span className="block skew-x-[10deg]">NAVIGATE</span>
                 </a>
               </div>
             </div>
 
-            {/* Block 3: ALUMINUM EXPERTS (With Welding BG) */}
-            <div className="relative group overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 hover:border-deep-gold/50 transition-colors shadow-sm">
+            {/* Block 3: ALUMINUM EXPERTS */}
+            <div className="relative group overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 hover:shadow-deep-gold/20 hover:border-deep-gold/30">
               
               {/* Background Image: Welding Sparks */}
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700"></div>
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700 contrast-125 saturate-0 group-hover:saturate-100"></div>
               
               {/* Gradient Overlay for Text Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-transparent mix-blend-hard-light"></div>
               
               <div className="relative z-10 h-full flex flex-col justify-end">
-                <h3 className="font-heading text-2xl text-deep-gold mb-2 drop-shadow-md">ALUMINUM EXPERTS</h3>
-                <p className="font-body text-slate-600 text-xs leading-relaxed">
+                <div className="w-8 h-1 bg-deep-gold mb-3 group-hover:w-16 transition-all duration-500"></div>
+                <h3 className="font-heading text-2xl text-slate-800 mb-2 drop-shadow-sm group-hover:text-deep-gold transition-colors">ALUMINUM EXPERTS</h3>
+                <p className="font-body text-slate-600 text-sm leading-relaxed font-medium">
                   Clean-room environments for contaminant-free aluminum welding, essential for modern EV frames.
                 </p>
               </div>
             </div>
 
-            {/* Block 4: ADAS CALIBRATION (With Tech BG) */}
-            <div className="relative group overflow-hidden rounded-2xl border border-slate-200 bg-electric-blue p-6 transition-colors shadow-lg shadow-electric-blue/20">
+            {/* Block 4: ADAS CALIBRATION */}
+            <div className="relative group overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-electric-blue to-blue-600 p-6 shadow-lg hover:shadow-2xl hover:shadow-electric-blue/40 hover:scale-[1.02] transition-all duration-500">
               
               {/* Background Image: HUD / Tech */}
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1496664444929-8c75efb9546f?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700"></div>
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1496664444929-8c75efb9546f?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700"></div>
               
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-electric-blue via-electric-blue/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent"></div>
 
               <div className="relative z-10 h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-heading text-2xl text-white mb-2 drop-shadow-md">ADAS CALIBRATION</h3>
-                  <p className="font-body text-white/90 text-xs leading-relaxed font-medium">
-                    In-house sensor realignment. We ensure your cameras, radar, and LIDAR "see" perfectly before you leave.
+                  <h3 className="font-heading text-2xl text-white mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">ADAS CALIBRATION</h3>
+                  <p className="font-body text-white/90 text-sm leading-relaxed font-medium drop-shadow-md">
+                    In-house sensor realignment. We ensure your cameras, radar, and LIDAR "see" perfectly.
                   </p>
                 </div>
                 
                 {/* Tech Icon */}
-                <div className="self-end text-white/40 group-hover:text-white transition-colors">
-                  <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="self-end text-white/60 group-hover:text-white transition-colors">
+                  <svg className="w-12 h-12 group-hover:animate-pulse drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
