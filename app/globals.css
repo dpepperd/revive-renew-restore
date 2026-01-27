@@ -16,6 +16,23 @@
   border-radius: 5px;
 }
 
+:root {
+  /* Brand Agnostic Variables for Careers Page (Light Theme) */
+  --primary-color: #00A3E0;        /* Matching existing electric-blue */
+  --primary-hover: #007bb8;        /* Darker shade for hover */
+  --secondary-color: #2C2C2C;      /* Charcoal from main theme */
+  
+  --background-main: #FFFFFF;      /* Clean white */
+  --background-section: #F8F9FA;   /* Light gray for alternating */
+  --card-background: #FFFFFF;
+  
+  --text-primary: #1A1A1A;         /* Nearly black for main text */
+  --text-secondary: #64748B;       /* Slate-500 for secondary */
+  --text-light: #FFFFFF;
+  
+  --border-color: #E2E8F0;         /* Slate-200 */
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #0088C0;
 }
