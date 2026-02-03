@@ -13,6 +13,16 @@ const CheckIcon = () => (
 
 export default function CareersPage() {
   const [activePosition, setActivePosition] = useState<string | null>(null);
+  const [appForm, setAppForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    position: "",
+    experience: "",
+    resumeFile: null as File | null,
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
   const togglePosition = (title: string) => {
     if (activePosition === title) {
@@ -24,7 +34,7 @@ export default function CareersPage() {
 
   const positions = [
     {
-      title: "Collision Repair Technician",
+      title: "Body Repair Technician",
       description: "Seeking experienced collision repair technicians to work on Rivian electric vehicles. Must have strong body repair skills and willingness to train on EV-specific procedures. Rivian certification provided.",
       requirements: [
         "3+ years collision repair experience",
@@ -44,18 +54,8 @@ export default function CareersPage() {
       ]
     },
     {
-      title: "Estimator",
-      description: "Detail-oriented estimator to assess Rivian collision damage and work with insurance companies. CCC1 experience required. Will train on Rivian-specific parts and repair procedures.",
-      requirements: [
-        "2+ years estimating experience",
-        "CCC1 proficiency",
-        "Strong customer service skills",
-        "Insurance company relationships preferred"
-      ]
-    },
-    {
-      title: "Customer Service Representative",
-      description: "Front desk professional to manage customer intake, scheduling, and communication. Automotive experience helpful but not required. Must be organized and customer-focused.",
+      title: "EV Technician",
+      description: "Specialized technician to handle EV-specific diagnostic and electrical work. Training provided on electric vehicle systems, battery management, and high-voltage safety protocols.",
       requirements: [
         "Excellent communication skills",
         "Professional demeanor",
@@ -211,6 +211,99 @@ export default function CareersPage() {
               </div>
             ))}
           </div>
+
+          {/* APPLICATION FORM */}
+          <section id="application-form" className="mt-12 bg-white p-8 rounded-2xl border border-border-theme shadow-sm max-w-3xl mx-auto">
+            <h3 className="font-heading text-2xl mb-2 text-txt-primary text-center">READY TO JOIN OUR TEAM?</h3>
+            <p className="text-center text-sm text-txt-secondary mb-6">Fill out the form below and we'll be in touch soon.</p>
+
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={async (e) => {
+              e.preventDefault();
+              setSubmitting(true);
+              setSubmitMessage(null);
+              try {
+                // prepare resume as base64 if present
+                let resumeBase64 = null;
+                let resumeFilename = null;
+                if (appForm.resumeFile) {
+                  resumeFilename = appForm.resumeFile.name;
+                  const arrBuf = await appForm.resumeFile.arrayBuffer();
+                  const b64 = Buffer.from(arrBuf).toString('base64');
+                  resumeBase64 = b64;
+                }
+
+                const resp = await fetch('/api/apply', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: appForm.name,
+                    email: appForm.email,
+                    phone: appForm.phone,
+                    position: appForm.position,
+                    experience: appForm.experience,
+                    resumeBase64,
+                    resumeFilename,
+                  })
+                });
+
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data?.error || 'Submission failed');
+                setSubmitMessage('Application submitted — thank you!');
+                setAppForm({ name: '', email: '', phone: '', position: '', experience: '', resumeFile: null });
+              } catch (err: any) {
+                setSubmitMessage(err?.message || 'Submission error');
+              } finally {
+                setSubmitting(false);
+              }
+            }}>
+              <div className="col-span-1">
+                <label className="text-xs font-tech text-slate-500">NAME *</label>
+                <input value={appForm.name} onChange={(e) => setAppForm({...appForm, name: e.target.value})} className="w-full mt-1 p-3 border border-slate-200 rounded" required />
+              </div>
+              <div className="col-span-1">
+                <label className="text-xs font-tech text-slate-500">EMAIL *</label>
+                <input type="email" value={appForm.email} onChange={(e) => setAppForm({...appForm, email: e.target.value})} className="w-full mt-1 p-3 border border-slate-200 rounded" required />
+              </div>
+
+              <div className="col-span-1">
+                <label className="text-xs font-tech text-slate-500">PHONE *</label>
+                <input value={appForm.phone} onChange={(e) => setAppForm({...appForm, phone: e.target.value})} className="w-full mt-1 p-3 border border-slate-200 rounded" required />
+              </div>
+              <div className="col-span-1">
+                <label className="text-xs font-tech text-slate-500">POSITION INTERESTED IN *</label>
+                <select value={appForm.position} onChange={(e) => setAppForm({...appForm, position: e.target.value})} className="w-full mt-1 p-3 border border-slate-200 rounded" required>
+                  <option value="">Select a position...</option>
+                  {positions.map((p) => (<option key={p.title} value={p.title}>{p.title}</option>))}
+                </select>
+              </div>
+
+              <div className="col-span-2">
+                <label className="text-xs font-tech text-slate-500">RESUME UPLOAD (PDF/DOC) *</label>
+                <div className="mt-2">
+                  <label className="block border border-dashed border-slate-200 rounded p-6 text-center cursor-pointer hover:border-electric-blue transition-colors">
+                    <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setAppForm({...appForm, resumeFile: e.target.files ? e.target.files[0] : null})} required />
+                    <div className="text-electric-blue">Click to Upload Resume</div>
+                    <div className="text-slate-400 text-sm">or drag and drop here</div>
+                    <div className="text-xs text-slate-500 mt-2">{appForm.resumeFile?.name || ''}</div>
+                  </label>
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <label className="text-xs font-tech text-slate-500">TELL US ABOUT YOUR EXPERIENCE</label>
+                <textarea value={appForm.experience} onChange={(e) => setAppForm({...appForm, experience: e.target.value})} rows={5} maxLength={500} className="w-full mt-1 p-3 border border-slate-200 rounded" placeholder="Briefly describe your relevant experience..."></textarea>
+              </div>
+
+              <div className="col-span-2 flex items-center justify-between">
+                <button type="submit" disabled={submitting} className="bg-electric-blue text-white px-6 py-3 rounded font-bold hover:shadow-lg transition-all">{submitting ? 'Submitting…' : 'SUBMIT APPLICATION'}</button>
+                <div className="text-xs text-slate-400">By submitting this form, you agree to our privacy policy.</div>
+              </div>
+
+              {submitMessage && (
+                <div className="col-span-2 text-center text-sm mt-2">{submitMessage}</div>
+              )}
+            </form>
+          </section>
         </div>
       </section>
 

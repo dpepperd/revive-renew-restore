@@ -46,50 +46,44 @@ export default function AboutPage() {
             
             {/* Text Content */}
             <div className="space-y-8">
-              <div>
-                <h2 className="font-heading text-4xl text-txt-primary mb-4">
-                  NEW <span className="text-primary">BEGINNINGS</span>
-                </h2>
-                <div className="w-20 h-1 bg-primary rounded-full"></div>
-              </div>
-              
-              <div className="prose prose-lg text-txt-secondary leading-relaxed">
+              <div className="prose prose-lg text-txt-secondary leading-relaxed text-lg md:text-xl font-semibold">
                 <p>
-                  <span className="font-bold text-txt-primary">Anthony (Tony) and Anita Laury</span> started their journey 
-                  with a challenge: Tony was one of just 19 people selected from over 100,000 applicants 
-                  to serve as a Delivery Service Partner (DSP) for Amazon.
+                  Anthony (Tony) and Anita Laury have always believed that the best solutions come from real-world challenges. When lengthy repair times began hampering their business operations, Tony didn't just complain—he designed the solution.
                 </p>
                 <p>
-                  That selection wasn't just luck—it was a testament to their steadfast commitment to hard work 
-                  and to each other. Together, they built a strong delivery team and an even stronger marriage, 
-                  proving that <span className="italic text-primary">"Success Fosters Growth."</span>
+                  That's how Revive, Renew & Restore was born.
                 </p>
                 <p>
-                  But success in delivery brought a new challenge. Lengthy repair times for their fleet vehicles 
-                  were hampering their goals. Tony saw a problem and designed the solution: <span className="font-bold">Revive, Renew & Restore</span>.
+                  What started as a way to solve their own vehicle efficiency problems has evolved into Jacksonville's premier destination for high-tech EV collision repair. Tony and Anita built their business on a simple principle: "Success Fosters Growth." By combining cutting-edge technology with unwavering commitment to quality and service, they've created more than just a repair shop—they've built a trusted partner for businesses and individuals who demand excellence.
                 </p>
                 <p>
-                  What began as a brainchild to solve their own fleet efficiency problems has evolved into 
-                  Jacksonville's premier destination for high-tech EV collision repair.
+                  Today, Revive, Renew & Restore stands as proof that when you identify a real need and commit to solving it the right way, success naturally follows.
                 </p>
               </div>
 
-              <div className="flex gap-4 pt-4">
-                <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-center min-w-[120px]">
-                  <span className="block font-heading text-3xl text-primary">100k+</span>
-                  <span className="text-xs text-txt-secondary uppercase tracking-wider">Applicants Beaten</span>
-                </div>
-                <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-center min-w-[120px]">
-                  <span className="block font-heading text-3xl text-primary">100%</span>
-                  <span className="text-xs text-txt-secondary uppercase tracking-wider">Commitment</span>
-                </div>
+              <div className="mt-8">
+                <Image 
+                  src="/tony_consult.webp" 
+                  alt="Tony Consulting - Revive Renew Restore"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto rounded-2xl shadow-lg"
+                />
               </div>
+
             </div>
 
             {/* Image / Quote Side */}
             <div className="relative">
-              {/* Decorative block */}
-              <div className="absolute -top-10 -right-10 w-2/3 h-2/3 bg-primary/5 rounded-3xl -z-0"></div>
+              <div className="mb-6">
+                <Image 
+                  src="/chad_van.webp" 
+                  alt="Chad Van - Revive Renew Restore"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto rounded-2xl shadow-lg"
+                />
+              </div>
               
               <div className="relative z-10 bg-slate-50 p-10 rounded-2xl border border-slate-200 shadow-xl">
                 <svg className="w-12 h-12 text-primary/20 mb-6" fill="currentColor" viewBox="0 0 24 24">
@@ -114,6 +108,35 @@ export default function AboutPage() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* 2.5 CERTIFICATIONS */}
+      <section className="py-20 bg-white border-b border-border-theme">
+        <div className="container mx-auto px-6">
+          <h3 className="text-center font-heading text-2xl text-txt-primary mb-12">
+            PROUD PARTNER OF <span className="text-primary">RIVIAN</span>
+          </h3>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-8 max-w-2xl mx-auto">
+            <div className="bg-white p-8 rounded-xl border border-border-theme shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <Image 
+                src="/Rivian_CFC_Logo_1.png" 
+                alt="Rivian CFC Certification"
+                width={150}
+                height={150}
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="bg-white p-8 rounded-xl border border-border-theme shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <Image 
+                src="/Rivian_CCC_White_background.png" 
+                alt="Rivian CCC Certification"
+                width={150}
+                height={150}
+                className="w-full h-auto"
+              />
+            </div>
           </div>
         </div>
       </section>

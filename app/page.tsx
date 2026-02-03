@@ -115,23 +115,32 @@ export default function Home() {
             {/* Block 1: RIVIAN CERTIFIED */}
             <div className="md:row-span-2 relative group overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 flex flex-col justify-between hover:border-electric-blue/50 transition-all duration-500 shadow-lg hover:shadow-2xl hover:scale-[1.02] z-10">
               
-              {/* THE BADGE */}
-              <div className="absolute top-6 right-6 w-24 md:w-32 bg-white p-2 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.1)] transform rotate-6 group-hover:rotate-0 group-hover:scale-110 transition-all duration-500 z-20">
-                <img 
-                  src="/rivian-badge.jpg" 
-                  alt="Rivian Certified Fleet Center" 
-                  className="w-full h-auto object-contain" 
-                />
+              {/* THE BADGES - SIDE BY SIDE */}
+              <div className="absolute top-6 right-0 left-0 flex justify-center gap-8 px-4 z-20">
+                <div className="w-48 md:w-64 bg-white p-4 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.1)] transform group-hover:shadow-[0_0_30px_rgba(0,163,224,0.5)] transition-all duration-500 hover:scale-110">
+                  <img 
+                    src="/Rivian_CFC_Logo_1.png" 
+                    alt="Rivian CFC Certification" 
+                    className="w-full h-auto object-contain" 
+                  />
+                </div>
+                <div className="w-48 md:w-64 bg-white p-4 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.1)] transform group-hover:shadow-[0_0_30px_rgba(0,163,224,0.5)] transition-all duration-500 hover:scale-110">
+                  <img 
+                    src="/Rivian_CCC_White_background.png" 
+                    alt="Rivian CCC Certification" 
+                    className="w-full h-auto object-contain" 
+                  />
+                </div>
               </div>
 
               {/* TEXT CONTENT */}
               <div className="relative z-10 mt-24 md:mt-32">
-                <div className="w-12 h-1 bg-electric-blue mb-6 group-hover:w-24 transition-all duration-500"></div>
-                <h3 className="font-heading text-4xl md:text-5xl mb-4 text-slate-900 leading-[0.9]">
-                  RIVIAN<br/>
-                  <span className="text-electric-blue text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-blue-600">CERTIFIED</span>
+                <div className="w-12 h-1 bg-electric-blue mb-6 group-hover:w-24 transition-all duration-500 mx-auto md:mx-0"></div>
+                <h3 className="font-heading text-4xl md:text-5xl mb-4 text-slate-900 leading-[0.9] flex items-baseline justify-center gap-6">
+                  <span className="whitespace-nowrap">RIVIAN</span>
+                  <span className="whitespace-nowrap text-electric-blue text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-blue-600">CERTIFIED</span>
                 </h3>
-                <p className="font-body text-slate-600 text-sm md:text-base leading-relaxed max-w-[100%] md:max-w-[90%]">
+                <p className="font-body text-slate-600 text-base md:text-lg leading-relaxed max-w-prose mx-auto text-center font-semibold">
                   One of only 12 facilities in Florida authorized to handle R1T & R1S structural repairs. We use official Rivian diagnostic software and OEM parts exclusively.
                 </p>
               </div>
