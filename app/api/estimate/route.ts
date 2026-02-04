@@ -7,10 +7,10 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { vehicleModel, insuranceProvider, description, contactName, phone } = body;
+    const { vehicleModel, insuranceProvider, description, contactName, phone, email } = body;
 
-    if (!contactName || !phone) {
-      return NextResponse.json({ error: 'Missing required fields (Name/Phone)' }, { status: 400 });
+    if (!contactName || !phone || !email) {
+      return NextResponse.json({ error: 'Missing required fields (Name/Phone/Email)' }, { status: 400 });
     }
 
     // Ensure uploads directory exists - BEST EFFORT
@@ -26,6 +26,7 @@ export async function POST(request: Request) {
         description, 
         contactName, 
         phone, 
+        email,
         createdAt: new Date().toISOString() 
       };
 
@@ -67,9 +68,10 @@ export async function POST(request: Request) {
         from: FROM_EMAIL,
         to: HR_EMAIL,
         subject: `New Estimate Request: ${contactName} (${vehicleModel})`,
-        text: `Name: ${contactName}\nPhone: ${phone}\nVehicle: ${vehicleModel}\nInsurance: ${insuranceProvider}\nDescription: ${description}`,
+        text: `Name: ${contactName}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicleModel}\nInsurance: ${insuranceProvider}\nDescription: ${description}`,
         html: `<p><strong>Name:</strong> ${contactName}</p>
                <p><strong>Phone:</strong> ${phone}</p>
+               <p><strong>Email:</strong> ${email}</p>
                <p><strong>Vehicle:</strong> ${vehicleModel}</p>
                <p><strong>Insurance:</strong> ${insuranceProvider}</p>
                <p><strong>Description:</strong><br/>${description?.replace(/\n/g, '<br/>')}</p>`,

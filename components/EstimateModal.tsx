@@ -11,6 +11,7 @@ export default function EstimateModal() {
     description: '',
     contactName: '',
     phone: '',
+    email: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -35,7 +36,7 @@ export default function EstimateModal() {
       setTimeout(() => {
         closeModal();
         setStatus('idle');
-        setFormData({ vehicleModel: 'Rivian R1T', insuranceProvider: '', description: '', contactName: '', phone: '' });
+        setFormData({ vehicleModel: 'Rivian R1T', insuranceProvider: '', description: '', contactName: '', phone: '', email: '' });
       }, 3000);
     } catch (err) {
       console.error(err);
@@ -141,6 +142,16 @@ export default function EstimateModal() {
                     className="w-full bg-slate-50 border border-slate-200 rounded p-3 text-slate-900 focus:border-electric-blue focus:outline-none transition-colors" 
                   />
                 </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-tech tracking-widest text-gray-400">EMAIL ADDRESS *</label>
+                <input 
+                  type="email" 
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-200 rounded p-3 text-slate-900 focus:border-electric-blue focus:outline-none transition-colors" 
+                />
               </div>
               
               {status === 'error' && (
