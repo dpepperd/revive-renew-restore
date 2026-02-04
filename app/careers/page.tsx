@@ -23,6 +23,7 @@ export default function CareersPage() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const togglePosition = (title: string) => {
     if (activePosition === title) {
@@ -280,8 +281,26 @@ export default function CareersPage() {
               <div className="col-span-2">
                 <label className="text-xs font-tech text-slate-500">RESUME UPLOAD (PDF/DOC) *</label>
                 <div className="mt-2">
-                  <label className="block border border-dashed border-slate-200 rounded p-6 text-center cursor-pointer hover:border-electric-blue transition-colors">
-                    <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setAppForm({...appForm, resumeFile: e.target.files ? e.target.files[0] : null})} required />
+                  <label 
+                    className={`block border-2 border-dashed rounded p-6 text-center cursor-pointer transition-colors ${
+                      isDragging ? 'border-electric-blue bg-blue-50' : 'border-slate-200 hover:border-electric-blue'
+                    }`}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setIsDragging(false);
+                      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                        const file = e.dataTransfer.files[0];
+                        if (file.type === "application/pdf" || file.name.endsWith(".doc") || file.name.endsWith(".docx")) {
+                           setAppForm({...appForm, resumeFile: file});
+                        } else {
+                           alert("Please upload a PDF or Word document.");
+                        }
+                      }
+                    }}
+                  >
+                    <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setAppForm({...appForm, resumeFile: e.target.files ? e.target.files[0] : null})} required={!appForm.resumeFile} />
                     <div className="text-electric-blue">Click to Upload Resume</div>
                     <div className="text-slate-400 text-sm">or drag and drop here</div>
                     <div className="text-xs text-slate-500 mt-2">{appForm.resumeFile?.name || ''}</div>
