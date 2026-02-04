@@ -47,13 +47,16 @@ export async function POST(request: Request) {
 
     // Email notification logic
     const HR_EMAIL = process.env.HR_EMAIL;
+    const ESTIMATE_EMAIL = process.env.ESTIMATE_EMAIL;
+    const RECIPIENT_EMAIL = ESTIMATE_EMAIL || HR_EMAIL;
+
     const SMTP_HOST = process.env.SMTP_HOST;
     const SMTP_PORT = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : undefined;
     const SMTP_USER = process.env.SMTP_USER;
     const SMTP_PASS = process.env.SMTP_PASS;
     const FROM_EMAIL = process.env.FROM_EMAIL || SMTP_USER || 'no-reply@example.com';
 
-    if (HR_EMAIL && SMTP_HOST && SMTP_USER && SMTP_PASS && SMTP_PORT) {
+    if (RECIPIENT_EMAIL && SMTP_HOST && SMTP_USER && SMTP_PASS && SMTP_PORT) {
       const transporter = nodemailer.createTransport({
         host: SMTP_HOST,
         port: SMTP_PORT,
@@ -66,7 +69,7 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: FROM_EMAIL,
-        to: HR_EMAIL,
+        to: RECIPIENT_EMAIL,
         subject: `New Estimate Request: ${contactName} (${vehicleModel})`,
         text: `Name: ${contactName}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicleModel}\nInsurance: ${insuranceProvider}\nDescription: ${description}`,
         html: `<p><strong>Name:</strong> ${contactName}</p>
