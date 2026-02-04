@@ -325,71 +325,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* 5. APPLICATION FORM */}
-      <section id="application-form" className="py-24 bg-bg-main">
-        <div className="container mx-auto px-6 max-w-2xl">
-          <div className="text-center mb-10">
-            <h2 className="font-heading text-4xl mb-4 text-txt-primary">READY TO <span className="text-primary">JOIN OUR TEAM?</span></h2>
-            <p className="text-txt-secondary">Fill out the form below and we'll be in touch soon.</p>
-          </div>
 
-          <form className="space-y-6 bg-white p-8 rounded-2xl shadow-lg border border-border-theme">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-txt-secondary uppercase tracking-wider">Name <span className="text-red-500">*</span></label>
-                <input type="text" required className="w-full bg-bg-section border border-border-theme rounded p-3 focus:border-primary focus:outline-none transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-txt-secondary uppercase tracking-wider">Email <span className="text-red-500">*</span></label>
-                <input type="email" required className="w-full bg-bg-section border border-border-theme rounded p-3 focus:border-primary focus:outline-none transition-colors" />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-txt-secondary uppercase tracking-wider">Phone <span className="text-red-500">*</span></label>
-                <input type="tel" required className="w-full bg-bg-section border border-border-theme rounded p-3 focus:border-primary focus:outline-none transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-txt-secondary uppercase tracking-wider">Position Interested In <span className="text-red-500">*</span></label>
-                <select required className="w-full bg-bg-section border border-border-theme rounded p-3 focus:border-primary focus:outline-none transition-colors">
-                  <option value="">Select a position...</option>
-                  <option value="technician">Collision Repair Technician</option>
-                  <option value="painter">Auto Body Painter</option>
-                  <option value="estimator">Estimator</option>
-                  <option value="csr">Customer Service Representative</option>
-                  <option value="other">Other/General Inquiry</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-txt-secondary uppercase tracking-wider">Resume Upload (PDF/DOC) <span className="text-red-500">*</span></label>
-              <div className="border-2 border-dashed border-border-theme rounded-lg p-6 text-center hover:border-primary/50 transition-colors bg-bg-section">
-                <input type="file" accept=".pdf,.doc,.docx" required className="hidden" id="resume-upload" />
-                <label htmlFor="resume-upload" className="cursor-pointer">
-                  <span className="block text-primary font-bold mb-1">Click to Upload Resume</span>
-                  <span className="text-xs text-txt-secondary">or drag and drop here</span>
-                </label>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-txt-secondary uppercase tracking-wider">Tell Us About Your Experience</label>
-              <textarea maxLength={500} rows={4} className="w-full bg-bg-section border border-border-theme rounded p-3 focus:border-primary focus:outline-none transition-colors" placeholder="Briefly describe your relevant experience..."></textarea>
-              <p className="text-right text-xs text-txt-secondary">Max 500 characters</p>
-            </div>
-
-            <button type="submit" className="w-full bg-primary py-4 font-tech font-bold text-white tracking-widest hover:bg-primary-hover shadow-lg hover:shadow-xl transition-all duration-300 rounded transform hover:-translate-y-0.5">
-              SUBMIT APPLICATION
-            </button>
-            
-            <p className="text-center text-xs text-txt-secondary pt-4">
-              By submitting this form, you agree to our privacy policy. We will contact you within 3-5 business days.
-            </p>
-          </form>
-        </div>
-      </section>
 
     </main>
   );

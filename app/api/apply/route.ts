@@ -12,29 +12,39 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Ensure uploads directory exists
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
-
+    // Ensure uploads directory exists - BEST EFFORT (will fail on Vercel/ro-fs)
+    let uploadsDir;
     let savedResumePath = null;
     let resumeBuffer: Buffer | null = null;
-    if (resumeBase64 && resumeFilename) {
-      const timestamp = Date.now();
-      const safeName = resumeFilename.replace(/[^a-zA-Z0-9.\\-_]/g, '_');
-      const filePath = path.join(uploadsDir, `${timestamp}_${safeName}`);
-      const buffer = Buffer.from(resumeBase64, 'base64');
-      fs.writeFileSync(filePath, buffer);
-      savedResumePath = `/uploads/${timestamp}_${safeName}`;
-      resumeBuffer = buffer;
-    }
+    
+    try {
+      uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+      if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
-    // Save an applications JSON entry
-    const appsFile = path.join(uploadsDir, 'applications.json');
-    const entry = { name, email, phone, position, experience, resume: savedResumePath, createdAt: new Date().toISOString() };
-    let apps = [];
-    try { apps = JSON.parse(fs.readFileSync(appsFile, 'utf8') || '[]'); } catch { apps = []; }
-    apps.push(entry);
-    fs.writeFileSync(appsFile, JSON.stringify(apps, null, 2));
+      if (resumeBase64 && resumeFilename) {
+        const timestamp = Date.now();
+        const safeName = resumeFilename.replace(/[^a-zA-Z0-9.\\-_]/g, '_');
+        const filePath = path.join(uploadsDir, `${timestamp}_${safeName}`);
+        const buffer = Buffer.from(resumeBase64, 'base64');
+        fs.writeFileSync(filePath, buffer);
+        savedResumePath = `/uploads/${timestamp}_${safeName}`;
+        resumeBuffer = buffer;
+      }
+
+      // Save an applications JSON entry
+      const appsFile = path.join(uploadsDir, 'applications.json');
+      const entry = { name, email, phone, position, experience, resume: savedResumePath, createdAt: new Date().toISOString() };
+      let apps = [];
+      try { apps = JSON.parse(fs.readFileSync(appsFile, 'utf8') || '[]'); } catch { apps = []; }
+      apps.push(entry);
+      fs.writeFileSync(appsFile, JSON.stringify(apps, null, 2));
+    } catch (fsError) {
+      console.warn('File system storage failed (likely read-only environment):', fsError);
+      // If we have resume data but couldn't save to disk, we still have it in memory for email
+      if (resumeBase64 && !resumeBuffer) {
+         resumeBuffer = Buffer.from(resumeBase64, 'base64');
+      }
+    }
 
     // If HR email and SMTP configured, send an email with the application
     const HR_EMAIL = process.env.HR_EMAIL;
@@ -70,10 +80,15 @@ export async function POST(request: Request) {
       }
 
       try {
-        await transporter.sendMail(mailOptions);
+        // Race email sending against a 10s timeout to prevent hanging the Vercel function
+        await Promise.race([
+          transporter.sendMail(mailOptions),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Email send timed out')), 10000))
+        ]);
+        console.log('Application email sent successfully');
       } catch (sendErr: any) {
-        // Log and continue — we already saved the app locally
-        console.error('Email send error:', sendErr);
+        // Log and continue — we already saved the app locally (best effort)
+        console.error('Email send failed or timed out:', sendErr);
       }
     }
 
