@@ -292,6 +292,10 @@ export default function CareersPage() {
                       setIsDragging(false);
                       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                         const file = e.dataTransfer.files[0];
+                        if (file.size > 5 * 1024 * 1024) {
+                          alert("File is too large. Maximum size is 5MB.");
+                          return;
+                        }
                         if (file.type === "application/pdf" || file.name.endsWith(".doc") || file.name.endsWith(".docx")) {
                            setAppForm({...appForm, resumeFile: file});
                         } else {
@@ -300,7 +304,24 @@ export default function CareersPage() {
                       }
                     }}
                   >
-                    <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setAppForm({...appForm, resumeFile: e.target.files ? e.target.files[0] : null})} required={!appForm.resumeFile} />
+                    <input 
+                      type="file" 
+                      accept=".pdf,.doc,.docx" 
+                      className="hidden" 
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const file = e.target.files[0];
+                          if (file.size > 5 * 1024 * 1024) {
+                            alert("File is too large. Maximum size is 5MB.");
+                            return;
+                          }
+                          setAppForm({...appForm, resumeFile: file});
+                        } else {
+                          setAppForm({...appForm, resumeFile: null});
+                        }
+                      }} 
+                      required={!appForm.resumeFile} 
+                    />
                     <div className="text-electric-blue">Click to Upload Resume</div>
                     <div className="text-slate-400 text-sm">or drag and drop here</div>
                     <div className="text-xs text-slate-500 mt-2">{appForm.resumeFile?.name || ''}</div>
@@ -314,7 +335,7 @@ export default function CareersPage() {
               </div>
 
               <div className="col-span-2 flex items-center justify-between">
-                <button type="submit" disabled={submitting} className="bg-electric-blue text-white px-6 py-3 rounded font-bold hover:shadow-lg transition-all">{submitting ? 'Submitting…' : 'SUBMIT APPLICATION'}</button>
+                <button type="submit" disabled={submitting} className="bg-electric-blue text-white px-6 py-3 rounded font-bold hover:shadow-lg transition-all">{submitting ? 'Uploading & Sending...' : 'SUBMIT APPLICATION'}</button>
                 <div className="text-xs text-slate-400">By submitting this form, you agree to our privacy policy.</div>
               </div>
 
