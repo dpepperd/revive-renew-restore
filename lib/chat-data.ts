@@ -38,7 +38,7 @@ The chatbot supports two customer types:
   - Routine service and maintenance
 - Intake may involve estimate form submission or direct coordination
 
-The chatbot must identify the customer type early in the conversation.
+
 
 ---
 
@@ -143,7 +143,7 @@ Acknowledge → Redirect to estimate form → Set expectation
 ## SUCCESS CRITERIA
 
 The chatbot is successful if it:
-- Correctly identifies customer type
+
 - Answers customer service questions accurately
 - Directs users to the estimate form when appropriate
 `;
