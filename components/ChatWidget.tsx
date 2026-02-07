@@ -15,7 +15,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! Welcome to Revive Renew Restore. How can I help you today? I can assist with estimates, appointment scheduling, or repair questions!",
+      text: "Hello! I'm here to help with your collision repair or service needs. How can I assist you today?",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -155,17 +155,25 @@ export default function ChatWidget() {
       ) : (
         <div className={styles.window}>
           <div className={styles.header}>
-            <div>
-              <h3>Chat with RRR</h3>
-              <p>We typically reply instantly</p>
-            </div>
-            <button
-              className={styles.close}
-              onClick={handleToggle}
-              aria-label="Close chat"
-            >
-              ×
-            </button>
+              <div className={styles.headerTitle}>
+                <h3>Chat with us</h3>
+                <span className={styles.statusDot}></span>
+              </div>
+              <div className={styles.headerActions}>
+                <button 
+                  onClick={() => {
+                    if (window.confirm('Start a new conversation?')) {
+                      localStorage.removeItem('chatSessionId');
+                      window.location.reload();
+                    }
+                  }}
+                  className={styles.resetButton}
+                  title="Reset Conversation"
+                >
+                  ↺
+                </button>
+                <button onClick={handleToggle} className={styles.closeButton}>×</button>
+              </div>
           </div>
 
           <div className={styles.messages}>
