@@ -9,6 +9,10 @@ const openai = new OpenAI({
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY is not defined');
+    }
+
     const { message, sessionId } = await request.json();
 
     if (!message || !sessionId) {
@@ -62,6 +66,6 @@ export async function POST(request: Request) {
 
   } catch (error: any) {
     console.error('Chat API Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }

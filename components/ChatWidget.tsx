@@ -81,7 +81,8 @@ export default function ChatWidget() {
       });
 
       if (!response.ok) {
-        throw new Error(`API returned status ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `API returned status ${response.status}`);
       }
 
       const data = await response.json();
@@ -100,13 +101,13 @@ export default function ChatWidget() {
       if (!isOpen) {
         setUnreadCount((prev) => prev + 1);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error calling chat API:', error);
       
       // Display error message to user
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I'm having trouble connecting to the system right now. Please try again later or call us at (904) 512-2688.",
+        text: `Error connecting to system: ${error.message || 'Unknown error'}. Please try again later or call us at (904) 512-2688.`,
         sender: 'bot',
         timestamp: new Date(),
       };
