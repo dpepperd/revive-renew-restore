@@ -3,15 +3,18 @@ import sql from '@/lib/db';
 import { getContext, OPENAI_MODEL } from '@/lib/chat';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// OpenAI client initialized lazily in handler to prevent build-time errors
+// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(request: Request) {
   try {
     if (!process.env.OPENAI_API_KEY) {
       throw new Error('OPENAI_API_KEY is not defined');
     }
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     const { message, sessionId } = await request.json();
 
