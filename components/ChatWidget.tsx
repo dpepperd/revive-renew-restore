@@ -23,6 +23,7 @@ export default function ChatWidget() {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [sessionId, setSessionId] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -32,6 +33,17 @@ export default function ChatWidget() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      let storedSessionId = window.localStorage.getItem('chatSessionId');
+      if (!storedSessionId) {
+        storedSessionId = Date.now().toString();
+        window.localStorage.setItem('chatSessionId', storedSessionId);
+      }
+      setSessionId(storedSessionId);
+    }
+  }, []);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -64,7 +76,7 @@ export default function ChatWidget() {
         },
         body: JSON.stringify({ 
           message: messageToSend,
-          sessionId: 'session-' + (typeof window !== 'undefined' ? window.localStorage.getItem('chatSessionId') || Date.now().toString() : 'default'),
+          sessionId: 'session-' + sessionId,
         }),
       });
 
