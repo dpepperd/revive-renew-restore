@@ -56,8 +56,8 @@ export default function ChatWidget() {
     setIsTyping(true);
 
     try {
-      // Call the webhook
-      const response = await fetch('https://n8nworkflows.app.n8n.cloud/webhook/rrr-collision-chat', {
+      // Call the Next.js API route
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,18 +65,15 @@ export default function ChatWidget() {
         body: JSON.stringify({ 
           message: messageToSend,
           sessionId: 'session-' + (typeof window !== 'undefined' ? window.localStorage.getItem('chatSessionId') || Date.now().toString() : 'default'),
-          timestamp: new Date().toISOString()
         }),
       });
 
       if (!response.ok) {
-        throw new Error(`Webhook returned status ${response.status}`);
+        throw new Error(`API returned status ${response.status}`);
       }
 
       const data = await response.json();
-      
-      const botText = data.response || data.message || data.text || 
-                      "Thanks for your message! Our team will be with you shortly.";
+      const botText = data.response; 
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -92,12 +89,12 @@ export default function ChatWidget() {
         setUnreadCount((prev) => prev + 1);
       }
     } catch (error) {
-      console.error('Error calling webhook:', error);
+      console.error('Error calling chat API:', error);
       
       // Display error message to user
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I'm having trouble connecting to the shop right now. You can reach us directly at (904) 555-0123.",
+        text: "I'm having trouble connecting to the system right now. Please try again later or call us at (904) 512-2688.",
         sender: 'bot',
         timestamp: new Date(),
       };
