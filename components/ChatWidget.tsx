@@ -156,7 +156,7 @@ export default function ChatWidget() {
         <div className={styles.window}>
           <div className={styles.header}>
               <div className={styles.headerTitle}>
-                <h3>Chat with us</h3>
+                <h3>Chat with us <span style={{ fontSize: '10px', opacity: 0.5 }}>(v2.1)</span></h3>
                 <span className={styles.statusDot}></span>
               </div>
               <div className={styles.headerActions}>
