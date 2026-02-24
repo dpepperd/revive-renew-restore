@@ -147,14 +147,16 @@ export default function CareersPage() {
                 text: "Clear advancement paths and opportunities to specialize in emerging EV technologies."
               }
             ].map((item, i) => (
-              <div key={i} className="p-8 bg-white border border-border-theme rounded-xl shadow-sm hover:shadow-md transition-shadow group">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-2xl group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                  ★
+              <div key={i} className="relative group overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-electric-blue to-blue-700 p-8 shadow-[0_10px_30px_-10px_rgba(0,163,224,0.4)] hover:shadow-[0_15px_40px_-10px_rgba(0,163,224,0.6)] hover:-translate-y-1 transition-all duration-500 z-10">
+                <div className="relative z-10">
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 text-2xl text-white shadow-[0_4px_10px_rgba(0,0,0,0.1)] group-hover:scale-110 group-hover:bg-white/30 transition-all duration-500">
+                    ★
+                  </div>
+                  <h3 className="font-heading text-2xl mb-3 text-white drop-shadow-md">{item.title}</h3>
+                  <p className="text-blue-50 leading-relaxed font-medium drop-shadow-sm">
+                    {item.text}
+                  </p>
                 </div>
-                <h3 className="font-heading text-2xl mb-3 text-txt-primary">{item.title}</h3>
-                <p className="text-txt-secondary leading-relaxed">
-                  {item.text}
-                </p>
               </div>
             ))}
           </div>
@@ -334,9 +336,12 @@ export default function CareersPage() {
                 <textarea value={appForm.experience} onChange={(e) => setAppForm({...appForm, experience: e.target.value})} rows={5} maxLength={500} className="w-full mt-1 p-3 border border-slate-200 rounded" placeholder="Briefly describe your relevant experience..."></textarea>
               </div>
 
-              <div className="col-span-2 flex items-center justify-between">
-                <button type="submit" disabled={submitting} className="bg-electric-blue text-white px-6 py-3 rounded font-bold hover:shadow-lg transition-all">{submitting ? 'Uploading & Sending...' : 'SUBMIT APPLICATION'}</button>
-                <div className="text-xs text-slate-400">By submitting this form, you agree to our privacy policy.</div>
+              <div className="col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <button type="submit" disabled={submitting} className="bg-electric-blue text-white px-6 py-3 rounded font-bold hover:shadow-lg transition-all w-full sm:w-auto shrink-0">{submitting ? 'Uploading & Sending...' : 'SUBMIT APPLICATION'}</button>
+                <label className="text-xs text-slate-500 flex items-start gap-2 cursor-pointer text-left">
+                  <input type="checkbox" required className="mt-0.5 rounded border-slate-300 text-electric-blue focus:ring-electric-blue cursor-pointer shrink-0" />
+                  <span>By submitting this form, you agree to our <Link href="/privacy-policy" className="text-electric-blue hover:underline">Privacy Policy</Link>.</span>
+                </label>
               </div>
 
               {submitMessage && (

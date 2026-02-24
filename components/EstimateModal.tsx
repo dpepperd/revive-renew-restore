@@ -2,6 +2,7 @@
 
 import { useEstimateModal } from "@/context/EstimateModalContext";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function EstimateModal() {
   const { isModalOpen, closeModal } = useEstimateModal();
@@ -160,6 +161,19 @@ export default function EstimateModal() {
                 </div>
               )}
 
+              <div className="space-y-2 mt-2">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    required 
+                    className="mt-1 w-4 h-4 text-electric-blue rounded border-slate-300 focus:ring-electric-blue cursor-pointer"
+                  />
+                  <span className="text-sm text-slate-600 font-body">
+                    By submitting this form, you agree to our <Link href="/privacy-policy" className="text-electric-blue hover:underline" onClick={closeModal}>Privacy Policy</Link>.
+                  </span>
+                </label>
+              </div>
+
               <button 
                 type="submit" 
                 disabled={submitting}
@@ -167,7 +181,7 @@ export default function EstimateModal() {
               >
                 {submitting ? 'SENDING REQUEST...' : 'SUBMIT REQUEST'}
               </button>
-              <p className="text-center text-xs text-gray-500 font-body">
+              <p className="text-center text-xs text-slate-500 font-body">
                 Your data is secure. We typically respond within 2 hours during business days.
               </p>
             </form>
